@@ -6,12 +6,19 @@ export default defineEventHandler(async(event)=>{
             email: body.email,
         }
     })
-    if (!user || user.password !== body.password) {
+    if(!user){
+        throw createError({
+            statusCode:404,
+            statusMessage: "User Not Found, Do you have an account wit this email?",
+        })
+    }
+    if (user?.password !== body.password) {
         throw createError({
             statusCode: 401,
             statusMessage: 'Email ou mot de passe invalide'
         })
     }
+
 
     setCookie(event,'auth_token',String(user.id),{
         httpOnly: true,

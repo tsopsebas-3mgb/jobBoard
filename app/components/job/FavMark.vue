@@ -10,6 +10,7 @@ const props = defineProps({
 
 const {
   addToFav,
+  removeFromFav,
   favData,
   favsLoading
 } = await useFav()
@@ -21,17 +22,21 @@ const isFavv = computed(() => {
   return favData.value.some(favJob => Number(favJob.id) === Number(props.jobId))
 })
 
-const handleFav = async () => {
-  await addToFav(props.jobId)
+const handleFav = async (e: Event) => {
+  isFavv.value? await removeFromFav(props.jobId) : await addToFav(props.jobId)
 }
 </script>
 
 <template>
-  <button @click="handleFav" :disabled="favsLoading" class="focus:outline-none">
+  <button 
+    @click.prevent.stop="handleFav"
+    :disabled="favsLoading" 
+    class="group/fav p-2 rounded-xl transition-all duration-300 hover:bg-red-50 active:scale-90 disabled:opacity-50"
+  >
     <Bookmark
-        :class="[
-        'transition-colors duration-200',
-        isFavv ? 'fill-yellow-400 stroke-yellow-400' : 'fill-transparent stroke-gray-400'
+      :class="[
+        'w-5 h-5 transition-all duration-300',
+        isFavv ? 'fill-red-500 stroke-red-500 scale-110' : 'fill-transparent stroke-slate-400 group-hover/fav:stroke-red-400'
       ]"
     />
   </button>

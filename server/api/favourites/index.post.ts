@@ -2,7 +2,8 @@ import { prisma } from "@/server/utils/prisma";
 
 export default defineEventHandler(async (event) => {
 
-    const userId = getCookie(event, 'auth_token');
+    const id = getCookie(event, 'auth_token');
+    const userId = Number(id)
     if (!userId) {
         throw createError({
             statusCode: 401,
@@ -11,8 +12,20 @@ export default defineEventHandler(async (event) => {
     }
 
     const body = await readBody(event);
-    const jobId = body.jobId;
+    const jobId = Number(body.jobId);
 
+    const alreadyExists = await prisma.favourite.findUnique({
+        where: {
+            userId_jobId:{
+                userId: userId,
+                jobId: jobId,
+            }
+        }
+    })
+    if(alreadyExists) throw createError({
+        statusCode: 409,
+        statusMessage:'Already a fav'
+    })
     const newFav = await prisma.favourite.create({
         data: {
             userId: Number(userId),

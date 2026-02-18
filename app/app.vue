@@ -1,11 +1,11 @@
 <template>
-  <div
-      class="w-full h-screen overflow-y-auto flex flex-col  justify-start items-center ">
+  <div class="min-h-screen bg-slate-50 selection:bg-blue-100 selection:text-blue-700">
     <NuxtLayout>
-      <NuxtPage/>
+      <NuxtPage />
     </NuxtLayout>
   </div>
 </template>
+
 <script lang="ts" setup>
 
 </script>
