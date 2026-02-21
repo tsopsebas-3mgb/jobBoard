@@ -34,13 +34,13 @@ const clearFilters = () => {
           <span>Over 2,000+ New Jobs Today</span>
         </div>
         
-        <h1 class="text-5xl md:text-7xl font-black text-slate-900 tracking-tight mb-8 leading-[1.1]">
+        <h1 class="text-5xl flex flex-col items-center justify-center md:text-7xl font-black text-slate-900 tracking-tight mb-8 leading-[1.1]">
           Find your next <span class="text-blue-600 relative inline-block">
             career move
-            <svg class="absolute -bottom-2 left-0 w-full" viewBox="0 0 358 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg class="absolute inline -bottom-2 left-0 w-full" viewBox="0 0 358 12" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M3 9C118.5 3 239.5 3 355 9" stroke="#2563EB" stroke-width="6" stroke-linecap="round"/>
             </svg>
-          </span> 🚀
+          </span>
         </h1>
         
         <p class="text-xl text-slate-500 mb-12 max-w-2xl mx-auto font-medium leading-relaxed">
@@ -49,14 +49,14 @@ const clearFilters = () => {
 
         <!-- Search Bar -->
         <div class="max-w-3xl mx-auto">
-          <div class="bg-white p-2 rounded-[32px] shadow-2xl shadow-blue-900/10 border border-slate-100 flex flex-col md:flex-row items-stretch gap-2 transition-all focus-within:ring-4 focus-within:ring-blue-500/5">
+          <div class="bg-white p-2 rounded-4xl shadow-2xl shadow-blue-900/10 border border-slate-100 flex flex-col md:flex-row items-stretch gap-2 transition-all focus-within:ring-4 focus-within:ring-blue-500/5">
             <div class="flex-1 relative flex items-center">
               <Search class="absolute left-6 h-5 w-5 text-slate-400" />
               <input
                 v-model="queryDomain"
                 type="text"
                 placeholder="Job title, keywords, or company..."
-                class="w-full pl-14 pr-4 py-5 bg-transparent border-none focus:ring-0 text-slate-900 font-bold placeholder:text-slate-400"
+                class="w-full pl-14 pr-4 py-5 bg-transparent border-none focus:ring-0 text-slate-900 font-bold placeholder:text-slate-400 focus:outline-4 focus:outline-blue-300/50 rounded-3xl"
               />
             </div>
             
@@ -67,12 +67,13 @@ const clearFilters = () => {
                 <SlidersHorizontal class=" absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
                 <select 
                   v-model="queryType"
-                  class="w-full pl-10 pr-8 py-3 bg-slate-50 rounded-2xl border-none focus:ring-2 focus:ring-blue-500 text-sm font-bold text-slate-700 appearance-none cursor-pointer"
+                  class="w-full pl-10 pr-8 py-3 bg-slate-50 rounded-2xl border-none focus:outline-4 focus:outline-blue-500/50  text-sm font-bold text-slate-700 appearance-none cursor-pointer"
                 >
-                  <option value="">All Types</option>
+                  <option value="">Contract Types</option>
                   <option value="CDI">Full-time (CDI)</option>
                   <option value="CDD">Contract (CDD)</option>
                   <option value="FREELANCE">Freelance</option>
+                  <option value="INTERNSHIP">Internship</option>
                 </select>
               </div>
               

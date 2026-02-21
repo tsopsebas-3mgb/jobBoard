@@ -15,24 +15,32 @@ model Job {
   contractType String   // CDI, CDD, FREELANCE
   domain       String
   city         String
-  country      String
+  region       String
+  neighborhood String
   minSalary    Int
   maxSalary    Int
   negotiable   Boolean  @default(false)
   publishDate  DateTime @default(now())
   status       String   @default("active")
 
+  publisher    User    @relation(fields:[publisherId], references:[id])
+  publisherId  Int
+
   favedBy Favourite[]
+  applications Application[]
 }
 
 model User {
-  id          Int      @id @default(autoincrement())
-  name        String
-  email       String  @unique
-  password    String
-  createdAt   DateTime @default(now())
+  id             Int      @id @default(autoincrement())
+  name           String
+  email          String  @unique
+  password       String
+  createdAt      DateTime @default(now())
 
-  favourites Favourite[]
+  jobs           Job[]
+  messages       Message[]
+  applications   Application[]
+  favourites     Favourite[]
 }
 
 model Favourite {
@@ -43,4 +51,28 @@ model Favourite {
   jobId   Int
 
   @@id([userId,jobId])
+}
+
+model Application {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  coverLetter String?
+  status      String  @default("pending") // pending, accepted, rejected
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+
+  job       Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  jobId     Int
+
+  @@unique([userId,jobId])
+}
+
+model Message {
+    id          Int       @id @default(autoincrement())
+    createdAt   DateTime  @default(now())
+    content     String
+
+    user        User      @relation(fields:[userId], references:[id] )
+    userId      Int
 }

@@ -5,11 +5,12 @@ const jobShema = z.object({
     title: z.string().min(3),
     employer: z.string().min(3),
     description: z.string().min(10),
-    contractType: z.enum(['CDI','CDD','FREELANCE']),
+    contractType: z.enum(['CDI','CDD','FREELANCE','INTERNSHIP']),
     domain: z.string().min(3),
     location: z.object({
         city: z.string().min(2),
-        country: z.string().min(2)
+        region: z.string().min(2),
+        neighborhood: z.string().min(2)
     }),
     salary: z.object({
         min: z.number().min(0),
@@ -31,6 +32,15 @@ export default defineEventHandler(async(event):Promise<any>=>{
         })
     }
     const cleanBody = parsedBody.data
+    const id = getCookie(event,'auth_token')
+    const userId = Number(id)
+
+    if (!id || isNaN(userId)) {
+        throw createError({
+            statusCode: 401, // 401 = Non autorisé
+            statusMessage: 'Unauthorized: User not found or invalid token',
+        })
+    }
 
     const newJob = await prisma.job.create({
         data: {
@@ -40,10 +50,12 @@ export default defineEventHandler(async(event):Promise<any>=>{
             contractType: cleanBody.contractType,
             domain: cleanBody.domain,
             city: cleanBody.location.city,
-            country: cleanBody.location.country,
+            region: cleanBody.location.region,
+            neighborhood: cleanBody.location.neighborhood,
             minSalary: cleanBody.salary.min,
             maxSalary: cleanBody.salary.max,
             negotiable: cleanBody.salary.negotiable,
+            publisherId: userId,
             status: 'active'
         }
     })
@@ -52,7 +64,8 @@ export default defineEventHandler(async(event):Promise<any>=>{
         ...newJob,
         location: {
             city: newJob.city,
-            country: newJob.country
+            region: newJob.region,
+            neighborhood: newJob.neighborhood
         },
         salary: {
             min: newJob.minSalary,

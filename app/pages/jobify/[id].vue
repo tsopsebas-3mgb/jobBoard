@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { 
-  ArrowLeft, 
-  Rocket, 
-  Building2, 
-  MapPin, 
-  Banknote, 
-  FileText, 
+import {
+  ArrowLeft,
+  Rocket,
+  Building2,
+  MapPin,
+  Banknote,
+  FileText,
   Type,
   Briefcase,
   Globe,
   Trash2,
   Send,
-    Mountain
+  Mountain
 
 } from "lucide-vue-next"
 import { CAMEROON_LOCATIONS } from "~/utils/locations"
@@ -19,11 +19,11 @@ import { CAMEROON_LOCATIONS } from "~/utils/locations"
 const { loading, error, postJob } = usePostJob()
 const {
   job,
-      errors,
-      getError,
-      validate,
-      checkAndSubmit,
-      clearJobInputs
+  errors,
+  getError,
+  validate,
+  checkAndSubmit,
+  clearJobInputs
 } = useJobForm()
 
 const handleSubmit = async () => {
@@ -50,7 +50,7 @@ const handleSubmit = async () => {
           <h1 class="text-4xl font-black text-slate-900 tracking-tight">Post a New Job 🚀</h1>
           <p class="text-slate-500 font-medium mt-2 text-lg">Find the perfect candidate for your growing team.</p>
         </div>
-        
+
         <div class="hidden lg:block">
           <div class="bg-blue-600/5 p-6 rounded-[32px] border border-blue-100 flex items-center gap-4">
             <div class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-600/20">
@@ -84,12 +84,12 @@ const handleSubmit = async () => {
               <label class="text-xs font-black uppercase tracking-[0.2em] text-slate-400 ml-1">Job Title</label>
               <div class="relative group">
                 <Briefcase class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300 group-focus-within:text-blue-500 transition-colors" />
-                <input 
-                  v-model="job.title" 
-                  type="text" 
-                  class="w-full pl-14 pr-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none font-bold text-slate-900 placeholder:text-slate-300"
-                  placeholder="e.g. Senior Product Designer"
-                  required 
+                <input
+                    v-model="job.title"
+                    type="text"
+                    class="w-full pl-14 pr-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none font-bold text-slate-900 placeholder:text-slate-300"
+                    placeholder="e.g. Senior Product Designer"
+                    required
                 />
               </div>
             </div>
@@ -98,12 +98,12 @@ const handleSubmit = async () => {
               <label class="text-xs font-black uppercase tracking-[0.2em] text-slate-400 ml-1">Company Name</label>
               <div class="relative group">
                 <Building2 class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300 group-focus-within:text-blue-500 transition-colors" />
-                <input 
-                  v-model="job.employer" 
-                  type="text" 
-                  class="w-full pl-14 pr-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none font-bold text-slate-900 placeholder:text-slate-300"
-                  placeholder="e.g. Stripe, Inc."
-                  required 
+                <input
+                    v-model="job.employer"
+                    type="text"
+                    class="w-full pl-14 pr-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none font-bold text-slate-900 placeholder:text-slate-300"
+                    placeholder="e.g. Stripe, Inc."
+                    required
                 />
               </div>
             </div>
@@ -113,11 +113,11 @@ const handleSubmit = async () => {
               <div class="relative group">
                 <Globe class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300 group-focus-within:text-blue-500 transition-colors" />
                 <input
-                  v-model="job.domain" 
-                  type="text" 
-                  class="w-full pl-14 pr-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none font-bold text-slate-900 placeholder:text-slate-300"
-                  placeholder="e.g. Fintech"
-                  required 
+                    v-model="job.domain"
+                    type="text"
+                    class="w-full pl-14 pr-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none font-bold text-slate-900 placeholder:text-slate-300"
+                    placeholder="e.g. Fintech"
+                    required
                 />
               </div>
             </div>
@@ -125,9 +125,9 @@ const handleSubmit = async () => {
             <div class="space-y-3">
               <label class="text-xs font-black uppercase tracking-[0.2em] text-slate-400 ml-1">Contract Type</label>
               <div class="relative">
-                <select 
-                  v-model="job.contractType" 
-                  class="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none font-bold text-slate-900 appearance-none cursor-pointer"
+                <select
+                    v-model="job.contractType"
+                    class="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none font-bold text-slate-900 appearance-none cursor-pointer"
                 >
                   <option value="CDI">Full-time (CDI)</option>
                   <option value="CDD">Contract (CDD)</option>
@@ -190,7 +190,7 @@ const handleSubmit = async () => {
               <Banknote class="w-6 h-6 text-emerald-500" />
               Compensation
             </h2>
-            
+
             <label class="relative inline-flex items-center cursor-pointer">
               <input type="checkbox" v-model="job.salary.negotiable" class="sr-only peer">
               <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
@@ -201,20 +201,20 @@ const handleSubmit = async () => {
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="space-y-3">
               <label class="text-xs font-black uppercase tracking-[0.2em] text-slate-400 ml-1">Minimum (FCFA)</label>
-              <input 
-                v-model.number="job.salary.min" 
-                type="number" 
-                class="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none font-bold text-slate-900"
-                placeholder="400000"
+              <input
+                  v-model.number="job.salary.min"
+                  type="number"
+                  class="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none font-bold text-slate-900"
+                  placeholder="400000"
               />
             </div>
             <div class="space-y-3">
               <label class="text-xs font-black uppercase tracking-[0.2em] text-slate-400 ml-1">Maximum (FCFA)</label>
-              <input 
-                v-model.number="job.salary.max" 
-                type="number" 
-                class="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none font-bold text-slate-900"
-                placeholder="800000"
+              <input
+                  v-model.number="job.salary.max"
+                  type="number"
+                  class="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none font-bold text-slate-900"
+                  placeholder="800000"
               />
             </div>
           </div>
@@ -229,31 +229,31 @@ const handleSubmit = async () => {
 
           <div class="space-y-3">
             <label class="text-xs font-black uppercase tracking-[0.2em] text-slate-400 ml-1">Full Description</label>
-            <textarea 
-              v-model="job.description" 
-              rows="8" 
-              class="w-full px-6 py-6 rounded-[32px] bg-slate-50 border border-slate-100 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none font-bold text-slate-900 leading-relaxed placeholder:text-slate-300"
-              placeholder="Tell us about the role, responsibilities, and requirements..."
-              required
+            <textarea
+                v-model="job.description"
+                rows="8"
+                class="w-full px-6 py-6 rounded-[32px] bg-slate-50 border border-slate-100 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none font-bold text-slate-900 leading-relaxed placeholder:text-slate-300"
+                placeholder="Tell us about the role, responsibilities, and requirements..."
+                required
             ></textarea>
           </div>
         </div>
 
         <!-- Form Actions -->
         <div class="flex flex-col md:flex-row justify-between items-center gap-6 pt-4">
-          <button 
-            type="button" 
-            @click="clearJobInputs" 
-            class="flex items-center gap-2 px-8 py-4 rounded-2xl text-slate-400 hover:text-red-500 font-black uppercase tracking-widest text-xs transition-colors"
+          <button
+              type="button"
+              @click="clearJobInputs"
+              class="flex items-center gap-2 px-8 py-4 rounded-2xl text-slate-400 hover:text-red-500 font-black uppercase tracking-widest text-xs transition-colors"
           >
             <Trash2 class="w-4 h-4" />
             Clear Form
           </button>
 
           <button
-            type="submit"
-            :disabled="loading"
-            class="w-full md:w-auto flex items-center justify-center gap-3 px-12 py-5 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-200 text-white font-black rounded-[24px] shadow-2xl shadow-blue-600/20 transition-all hover:scale-[1.02] active:scale-[0.98] group"
+              type="submit"
+              :disabled="loading"
+              class="w-full md:w-auto flex items-center justify-center gap-3 px-12 py-5 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-200 text-white font-black rounded-[24px] shadow-2xl shadow-blue-600/20 transition-all hover:scale-[1.02] active:scale-[0.98] group"
           >
             <span v-if="loading">Publishing...</span>
             <template v-else>

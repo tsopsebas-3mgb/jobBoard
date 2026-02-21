@@ -1,6 +1,7 @@
 export interface Location {
   city: string;
-  country: string;
+  region: string;
+  neighborhood: string;
 }
 
 export interface Salary {

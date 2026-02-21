@@ -13,7 +13,7 @@ const {
   removeFromFav,
   favData,
   favsLoading
-} = await useFav()
+} =  useFav()
 
 
 const isFavv = computed(() => {

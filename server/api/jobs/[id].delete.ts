@@ -10,10 +10,16 @@ export default defineEventHandler(async(event):Promise<any> => {
             statusMessage: 'Invalid job ID'
         });
     }
+    const uId = getCookie(event, 'auth_token')
+    const userId = Number(uId)
 
+    if (!userId || isNaN(userId)) throw createError({
+        statusCode: 401,
+        statusMessage: 'User id not found, are you logged in?',
+    })
     try {
         const deletedJob = await prisma.job.delete({
-            where: { id }
+            where: { id,publisherId:userId },
         });
 
         return {

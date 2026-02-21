@@ -39,7 +39,7 @@ const formatCurrency = (amount) => {
       <div class="flex flex-wrap items-center gap-y-2 gap-x-4 text-xs font-bold text-slate-500 mb-6 uppercase tracking-wider">
         <div class="flex items-center gap-1.5 bg-slate-50 px-3 py-1.5 rounded-xl">
           <MapPin class="w-3.5 h-3.5 text-blue-500" />
-          {{ job.location.city }}
+          {{ job.location.neighborhood }}, {{ job.location.city }}
         </div>
         <div class="flex items-center gap-1.5 bg-slate-50 px-3 py-1.5 rounded-xl">
           <Banknote class="w-3.5 h-3.5 text-emerald-500" />

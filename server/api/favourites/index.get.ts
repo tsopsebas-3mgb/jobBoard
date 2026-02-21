@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
 
     return favourites.map(f => ({
         ...f.job,
-        location: { city: f.job.city, country: f.job.country },
+        location: { city: f.job.city, region: f.job.region, neighborhood: f.job.neighborhood },
         salary: { min: f.job.minSalary, max: f.job.maxSalary, negotiable: f.job.negotiable }
     }));
 });

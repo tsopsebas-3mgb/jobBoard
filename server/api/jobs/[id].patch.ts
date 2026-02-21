@@ -8,7 +8,8 @@ const jobUpdateSchema = z.object({
     domain: z.string(),
     location: z.object({
         city: z.string(),
-        country: z.string(),
+        region: z.string(),
+        neighborhood: z.string(),
     }),
     salary: z.object({
         min: z.number(),
@@ -30,7 +31,13 @@ export default defineEventHandler(async(event):Promise<any> => {
             statusMessage: 'Invalid job ID'
         });
     }
+    const uId = getCookie(event, 'auth_token')
+    const userId = Number(uId)
 
+    if (!userId || isNaN(userId)) throw createError({
+        statusCode: 401,
+        statusMessage: 'User id not found, are you logged in?',
+    })
     const body = await readBody(event);
     const parsedBody = jobUpdateSchema.safeParse(body);
 
@@ -47,7 +54,8 @@ export default defineEventHandler(async(event):Promise<any> => {
     const data: any = { ...updates };
     if (updates.location) {
         data.city = updates.location.city;
-        data.country = updates.location.country;
+        data.region = updates.location.region;
+        data.neighborhood = updates.location.neighborhood;
         delete data.location;
     }
     if (updates.salary) {
@@ -59,7 +67,7 @@ export default defineEventHandler(async(event):Promise<any> => {
 
     try {
         const updatedJob = await prisma.job.update({
-            where: { id },
+            where: { id,publisherId:userId },
             data
         });
 

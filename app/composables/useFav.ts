@@ -49,7 +49,7 @@ export const useFav = () => {
             errorMsg.value=err.data?.statusMessage || 'Une erreur est survenue'
         }
     }
-        const favCount = favData.value?.length
+        const favCount = computed(()=>favData.value?.length)
 
     return {
         addToFav,
